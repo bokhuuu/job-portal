@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\JobOfferController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn() => to_route('jobOffers.index'));
+
+Route::resource('jobOffers', JobOfferController::class)->only(['index', 'show']);

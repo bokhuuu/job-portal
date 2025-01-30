@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobOffer;
 use Illuminate\Http\Request;
 
 class JobOfferController extends Controller
@@ -11,7 +12,7 @@ class JobOfferController extends Controller
      */
     public function index()
     {
-        //
+        return view('jobOffer.index', ['jobOffers' => JobOffer::all()]);
     }
 
     /**
@@ -33,9 +34,9 @@ class JobOfferController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(JobOffer $jobOffer)
     {
-        //
+        return view('jobOffer.show', compact('jobOffer')); 
     }
 
     /**
