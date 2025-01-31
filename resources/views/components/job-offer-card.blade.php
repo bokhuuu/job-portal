@@ -10,8 +10,16 @@
             <div>{{ $jobOffer->location }}</div>
         </div>
         <div class="flex space-x-1 text-xs">
-            <x-tag>{{ Str::ucfirst($jobOffer->experience) }}</x-tag>
-            <x-tag>{{ $jobOffer->category }}</x-tag>
+            <x-tag>
+                <a href="{{ route('jobOffers.index', ['experience' => $jobOffer->experience]) }}">
+                    {{ Str::ucfirst($jobOffer->experience) }}
+                </a>
+            </x-tag>
+            <x-tag>
+                <a href="{{ route('jobOffers.index', ['category' => $jobOffer->category]) }}">
+                    {{ $jobOffer->category }}
+                </a>
+            </x-tag>
         </div>
     </div>
 
