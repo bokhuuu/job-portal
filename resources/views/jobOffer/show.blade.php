@@ -15,8 +15,8 @@
             @foreach ($jobOffer->employer->jobOffers as $relatedJobOffer)
                 <div class="mb-4 flex justify-between">
                     <div class="">
-                        <div class="textfont-bold">
-                            <a href="{{ route('jobOffers.show', $relatedJobOffer) }}" class="text-blue-500">
+                        <div>
+                            <a href="{{ route('jobOffers.show', $relatedJobOffer) }}" class="font-bold text-blue-400">
                                 {{ $relatedJobOffer->title }}
 
                             </a>
