@@ -1,8 +1,8 @@
 <x-layout>
-    <x-breadcrumbs class="mb-4" :links="['Job Offers' => route('jobOffers.index')]" />
+    <x-breadcrumbs class="mb-4" :links="['Job Offers' => route('jobOffer.index')]" />
 
     <x-card class="mb-4 text-sm" x-data="">
-        <form x-ref="filters" id="filtering-form" action="{{ route('jobOffers.index') }}" method="GET">
+        <form x-ref="filters" id="filtering-form" action="{{ route('jobOffer.index') }}" method="GET">
             <div class="mb-4 grid grid-cols-2 gap-4">
                 <div>
                     <div class="mb-1 font-semibold">Search</div>
@@ -43,7 +43,7 @@
     @foreach ($jobOffers as $jobOffer)
         <x-job-offer-card class="mb-4" :$jobOffer>
             <div>
-                <x-link-button :href="route('jobOffers.show', $jobOffer)">
+                <x-link-button :href="route('jobOffer.show', $jobOffer)">
                     Show
                 </x-link-button>
             </div>

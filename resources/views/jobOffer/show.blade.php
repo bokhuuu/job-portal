@@ -1,9 +1,24 @@
 <x-layout>
-    <x-breadcrumbs class="mb-4" :links="['Job Offers' => route('jobOffers.index'), $jobOffer->title => '#']" />
+    <x-breadcrumbs class="mb-4" :links="[
+        'Job Offers' => route('jobOffer.index'),
+        $jobOffer->title => route('jobOffer.show', $jobOffer),
+        'Apply' => '#',
+    ]" />
     <x-job-offer-card :$jobOffer>
         <p class="text-sm text-slate-500 mb-4">
             {!! nl2br(e($jobOffer->description)) !!}
         </p>
+
+        @can('apply', $jobOffer)
+            <x-link-button :href="route('jobOffer.application.create', $jobOffer)">
+                Apply
+            </x-link-button>
+        @else
+            <div class="text-center text-sm font-medium text-slate-500">
+                You already applied to this job
+            </div>
+        @endcan
+
     </x-job-offer-card>
 
     <x-card>
@@ -16,7 +31,7 @@
                 <div class="mb-4 flex justify-between">
                     <div class="">
                         <div>
-                            <a href="{{ route('jobOffers.show', $relatedJobOffer) }}" class="font-bold text-blue-400">
+                            <a href="{{ route('jobOffer.show', $relatedJobOffer) }}" class="font-bold text-blue-400">
                                 {{ $relatedJobOffer->title }}
 
                             </a>

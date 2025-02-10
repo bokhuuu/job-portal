@@ -11,12 +11,12 @@
         </div>
         <div class="flex space-x-1 text-xs">
             <x-tag>
-                <a href="{{ route('jobOffers.index', ['experience' => $jobOffer->experience]) }}">
+                <a href="{{ route('jobOffer.index', ['experience' => $jobOffer->experience]) }}">
                     {{ Str::ucfirst($jobOffer->experience) }}
                 </a>
             </x-tag>
             <x-tag>
-                <a href="{{ route('jobOffers.index', ['category' => $jobOffer->category]) }}">
+                <a href="{{ route('jobOffer.index', ['category' => $jobOffer->category]) }}">
                     {{ $jobOffer->category }}
                 </a>
             </x-tag>
