@@ -22,19 +22,21 @@
         <ul class="flex space-x-2">
             @auth
                 <li>
-                    {{ auth()->user()->name ?? Anonymous }}
+                    <a href="{{ route('my-job-applications.index') }}">
+                        {{ auth()->user()->name ?? Anonymous }}: Applications
+                    </a>
                 </li>
 
                 <li>
                     <form action="{{ route('auth.destroy') }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="font-bold text-blue-400">Logout</button>
+                        <button class="text-indigo-500 hover:underline">Logout</button>
                     </form>
                 </li>
             @else
                 <li>
-                    <a href="{{ route('auth.create') }}" class="font-bold text-blue-400">
+                    <a href="{{ route('auth.create') }}" class="text-indigo-500 hover:underline">
                         Sign in
                     </a>
                 </li>
