@@ -22,10 +22,19 @@
         <ul class="flex space-x-2">
             @auth
                 <li>
-                    <a href="{{ route('my-job-applications.index') }}">
-                        {{ auth()->user()->name ?? Anonymous }}: Applications
+                    <span>
+                        {{ auth()->user()->name ?? Anonymous }}:
+                    </span>
+                    <a href="{{ route('my-job-applications.index') }}" class='text-slate-500 hover:underline'>
+                        Applications
                     </a>
                 </li>
+
+
+                <li>
+                    <a href="{{ route('my_jobs.index') }}" class='text-slate-500 hover:underline'>My Jobs</a>
+                </li>
+
 
                 <li>
                     <form action="{{ route('auth.destroy') }}" method="POST">
