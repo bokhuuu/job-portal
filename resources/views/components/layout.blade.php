@@ -25,14 +25,14 @@
                     <span>
                         {{ auth()->user()->name ?? Anonymous }}:
                     </span>
-                    <a href="{{ route('my-job-applications.index') }}" class='text-slate-500 hover:underline'>
+                    <a href="{{ route('my-job-applications.index') }}" class='text-slate-400 hover:underline'>
                         Applications
                     </a>
                 </li>
 
 
                 <li>
-                    <a href="{{ route('my_jobs.index') }}" class='text-slate-500 hover:underline'>My Jobs</a>
+                    <a href="{{ route('my_jobs.index') }}" class='text-slate-400 hover:underline'>My Jobs</a>
                 </li>
 
 
