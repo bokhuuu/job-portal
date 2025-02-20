@@ -16,7 +16,7 @@ class Employer extends Model
 
     public function jobOffers(): HasMany
     {
-        return $this->hasMany(jobOffer::class);
+        return $this->hasMany(JobOffer::class);
     }
 
     public function user(): BelongsTo

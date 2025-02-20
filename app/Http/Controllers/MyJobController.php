@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobRequest;
 use App\Models\JobOffer;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class MyJobController extends Controller
@@ -10,49 +12,54 @@ class MyJobController extends Controller
 
     public function index()
     {
-        return view('my_job.index');
+        Gate::authorize('viewAnyEmployer', JobOffer::class);
+        return view(
+            'my_job.index',
+            [
+                'myJobs' =>  auth()->user()->employer
+                    ->jobOffers()
+                    ->with(['employer', 'jobApplications', 'jobApplications.user'])
+                    ->get()
+            ]
+
+        );
     }
 
 
     public function create()
     {
+        Gate::authorize('create', JobOffer::class);
         return view('my_job.create');
     }
 
 
-    public function store(Request $request)
+    public function store(JobRequest $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'salary' => 'required|numeric|min:5000',
-            'description' => 'required|string',
-            'experience' => 'required|in:' . implode(',', JobOffer::$experience),
-            'category' => 'required|in:' . implode(',', JobOffer::$category)
-        ]);
-
-        auth()->user()->employer->jobOffers()->create($validatedData);
+        Gate::authorize('create', JobOffer::class);
+        auth()->user()->employer->jobOffers()->create($request->validated());
 
         return redirect()->route('my_jobs.index')
             ->with('success', 'Job created successfully');
     }
 
 
-    public function show(string $id)
+    public function edit(JobOffer $myJob)
     {
-        //
+        Gate::authorize('update', $myJob);
+        return view(
+            'my_job.edit',
+            ['myJob' => $myJob]
+        );
     }
 
 
-    public function edit(string $id)
+    public function update(JobRequest $request, JobOffer $myJob)
     {
-        //
-    }
+        Gate::authorize('update', $myJob);
+        $myJob->update($request->validated());
 
-
-    public function update(Request $request, string $id)
-    {
-        //
+        return redirect()->route('my_jobs.index')
+            ->with('success', 'Job updated successfully');
     }
 
 
