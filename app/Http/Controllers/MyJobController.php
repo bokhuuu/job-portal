@@ -19,6 +19,7 @@ class MyJobController extends Controller
                 'myJobs' =>  auth()->user()->employer
                     ->jobOffers()
                     ->with(['employer', 'jobApplications', 'jobApplications.user'])
+                    ->withTrashed()
                     ->get()
             ]
 
@@ -63,8 +64,11 @@ class MyJobController extends Controller
     }
 
 
-    public function destroy(string $id)
+    public function destroy(JobOffer $myJob)
     {
-        //
+        $myJob->delete();
+
+        return redirect()->route('my_jobs.index')
+            ->with('success', 'Job deleted successfully');
     }
 }
