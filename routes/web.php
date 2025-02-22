@@ -6,6 +6,7 @@ use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobOfferController;
 use App\Http\Controllers\MyJobApplicationController;
 use App\Http\Controllers\MyJobController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn() => to_route('jobOffer.index'));
@@ -33,3 +34,6 @@ Route::middleware('auth')->group(
             ->resource('my_jobs', MyJobController::class);
     }
 );
+
+Route::get('register', [RegisterController::class, 'create'])->name('register');
+Route::post('register', [RegisterController::class, 'store'])->name('register.store');

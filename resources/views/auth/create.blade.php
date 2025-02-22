@@ -24,12 +24,7 @@
                         <label for="remember">Remember me</label>
                     </div>
                 </div>
-
-                <div>
-                    <a href="#" class="text-indigo-500 hover:underline">
-                        Forget password?
-                    </a>
-                </div>
+                
             </div>
 
             <x-button class="w-full bg-green-50">

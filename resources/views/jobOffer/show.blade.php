@@ -9,15 +9,21 @@
             {!! nl2br(e($jobOffer->description)) !!}
         </p>
 
-        @can('apply', $jobOffer)
-            <x-link-button :href="route('jobOffer.application.create', $jobOffer)">
-                Apply
-            </x-link-button>
+        @auth
+            @can('apply', $jobOffer)
+                <x-link-button :href="route('jobOffer.application.create', $jobOffer)">
+                    Apply
+                </x-link-button>
+            @else
+                <div class="text-center text-sm font-medium text-slate-500">
+                    You already applied to this job
+                </div>
+            @endcan
         @else
             <div class="text-center text-sm font-medium text-slate-500">
-                You already applied to this job
+                You must be logged in to apply
             </div>
-        @endcan
+        @endauth
 
     </x-job-offer-card>
 
@@ -29,9 +35,9 @@
         <div class="text-sm text-slate-500">
             @foreach ($jobOffer->employer->jobOffers as $relatedJobOffer)
                 <div class="mb-4 flex justify-between">
-                    <div class="">
+                    <div>
                         <div>
-                            <a href="{{ route('jobOffer.show', $relatedJobOffer) }}" class="font-bold text-blue-400">
+                            <a href="{{ route('jobOffer.show', $relatedJobOffer) }}" class="font-bold text-indigo-500">
                                 {{ $relatedJobOffer->title }}
 
                             </a>

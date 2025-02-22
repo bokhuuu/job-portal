@@ -13,42 +13,49 @@
 <body
     class="w-[95%] from-10% via-30% to-90% mx-auto mt-10 max-w-2xl bg-gradient-to-r from-indigo-200 via-sky-200 to-emerald-200 text-slate-700">
     <nav class="mb-8 flex justify-between text-lg font-medium">
-        <ul class="flex space-x-2">
+        <ul class="text-indigo-500 font-bold hover:underline">
             <li>
                 <a href="{{ route('jobOffer.index') }}">Home</a>
             </li>
         </ul>
 
-        <ul class="flex space-x-2">
+        <ul class="text-right">
             @auth
                 <li>
-                    <span>
-                        {{ auth()->user()->name ?? Anonymous }}:
+                    <span class="block font-extrabold">
+                        {{ auth()->user()->name ?? Anonymous }}
                     </span>
-                    <a href="{{ route('my-job-applications.index') }}" class='text-slate-400 hover:underline'>
+                    <a href="{{ route('my-job-applications.index') }}" class="font-bold text-indigo-500 hover:underline">
                         Applications
                     </a>
                 </li>
 
-
                 <li>
-                    <a href="{{ route('my_jobs.index') }}" class='text-slate-400 hover:underline'>My Jobs</a>
+                    <a href="{{ route('my_jobs.index') }}" class="font-bold text-indigo-500 hover:underline">My Jobs</a>
                 </li>
-
 
                 <li>
                     <form action="{{ route('auth.destroy') }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="text-indigo-500 hover:underline">Logout</button>
+                        <button class="font-bold text-indigo-500 hover:underline">Logout</button>
                     </form>
                 </li>
             @else
-                <li>
-                    <a href="{{ route('auth.create') }}" class="text-indigo-500 hover:underline">
-                        Sign in
-                    </a>
-                </li>
+                <div class="flex space-x-2">
+                    <li>
+                        <a href="{{ route('auth.create') }}" class="font-bold text-indigo-500 hover:underline">
+                            Sign in
+                        </a>
+                    </li>
+                    <span>|</span>
+                    <li>
+                        <a href="{{ route('register') }}" class="font-bold text-indigo-500 hover:underline">
+                            Register
+                        </a>
+                    </li>
+                </div>
+
             @endauth
         </ul>
     </nav>
